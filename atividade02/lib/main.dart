@@ -195,8 +195,31 @@ class TelaConfirmacao extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Confirmação"),
       ),
-      body: const Center(
-        child: Text("Tela 2: Dados recebidos com sucesso!"),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Nome: $nome"),
+            Text("Idade: $idade"),
+            Text("Email: $email"),
+            Text("Sexo: $sexo"),
+            Text("Termos aceitos: ${termosAceitos ? "Sim" : "Não"}"),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("Voltar"),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("Editar"),
+            ),
+          ],
+        ),
       ),
     );
   }
