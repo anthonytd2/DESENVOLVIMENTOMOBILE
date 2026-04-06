@@ -127,16 +127,21 @@ class _TelaCadastroState extends State<TelaCadastro> {
               TextField(
                 controller: nomeController,
                 decoration: const InputDecoration(labelText: "Nome"),
+                textInputAction: TextInputAction.next,
               ),
               const SizedBox(height: 10),
               TextField(
                 controller: idadeController,
                 decoration: const InputDecoration(labelText: "Idade"),
+                keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.next,
               ),
               const SizedBox(height: 10),
               TextField(
                 controller: emailController,
                 decoration: const InputDecoration(labelText: "Email"),
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.done,
               ),
               const SizedBox(height: 20),
               DropdownButton<String>(
