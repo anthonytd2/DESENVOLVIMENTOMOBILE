@@ -113,72 +113,136 @@ class _TelaCadastroState extends State<TelaCadastro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[50],
       appBar: AppBar(
         title: const Text("Cadastro de Usuário"),
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
       ),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text("Preencha os campos abaixo"),
-              const SizedBox(height: 20),
-              TextField(
-                controller: nomeController,
-                decoration: const InputDecoration(labelText: "Nome"),
-                textInputAction: TextInputAction.next,
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: idadeController,
-                decoration: const InputDecoration(labelText: "Idade"),
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: emailController,
-                decoration: const InputDecoration(labelText: "Email"),
-                keyboardType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.done,
-              ),
-              const SizedBox(height: 20),
-              DropdownButton<String>(
-                hint: const Text("Selecione o Sexo"),
-                value: sexoSelecionado,
-                items: const [
-                  DropdownMenuItem(value: "Masculino", child: Text("Masculino")),
-                  DropdownMenuItem(value: "Feminino", child: Text("Feminino")),
-                  DropdownMenuItem(value: "Outro", child: Text("Outro")),
-                ],
-                onChanged: (String? novoValor) {
-                  setState(() {
-                    sexoSelecionado = novoValor;
-                  });
-                },
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Checkbox(
-                    value: termosAceitos,
-                    onChanged: (bool? novoValor) {
-                      setState(() {
-                        termosAceitos = novoValor ?? false;
-                      });
-                    },
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Preencha os campos abaixo",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
                   ),
-                  const Text("Aceito os termos de uso"),
-                ],
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _validarCampos,
-                child: const Text("Cadastrar"),
-              ),
-            ],
+                ),
+                const SizedBox(height: 30),
+                TextField(
+                  controller: nomeController,
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(
+                    labelText: "Nome",
+                    hintText: "Digite seu nome completo",
+                    contentPadding: const EdgeInsets.all(16.0),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                TextField(
+                  controller: idadeController,
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(
+                    labelText: "Idade",
+                    hintText: "Ex: 25",
+                    contentPadding: const EdgeInsets.all(16.0),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                TextField(
+                  controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.done,
+                  decoration: InputDecoration(
+                    labelText: "Email",
+                    hintText: "exemplo@email.com",
+                    contentPadding: const EdgeInsets.all(16.0),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                DropdownButtonFormField<String>(
+                  decoration: InputDecoration(
+                    labelText: "Sexo",
+                    contentPadding: const EdgeInsets.all(16.0),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white,
+                  ),
+                  hint: const Text("Selecione o Sexo"),
+                  value: sexoSelecionado,
+                  items: const [
+                    DropdownMenuItem(value: "Masculino", child: Text("Masculino")),
+                    DropdownMenuItem(value: "Feminino", child: Text("Feminino")),
+                    DropdownMenuItem(value: "Outro", child: Text("Outro")),
+                  ],
+                  onChanged: (String? novoValor) {
+                    setState(() {
+                      sexoSelecionado = novoValor;
+                    });
+                  },
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Checkbox(
+                      value: termosAceitos,
+                      onChanged: (bool? novoValor) {
+                        setState(() {
+                          termosAceitos = novoValor ?? false;
+                        });
+                      },
+                    ),
+                    const Text(
+                      "Aceito os termos de uso do app",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 30),
+                SizedBox(
+                  width: double.infinity,
+                  height: 55,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
+                    onPressed: _validarCampos,
+                    child: const Text(
+                      "Cadastrar",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -205,27 +269,40 @@ class TelaConfirmacao extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[50],
       appBar: AppBar(
         title: const Text("Confirmação"),
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Nome: $nome"),
-            Text("Idade: $idade"),
-            Text("Email: $email"),
-            Text("Sexo: $sexo"),
-            Text("Termos aceitos: ${termosAceitos ? "Sim" : "Não"}"),
-            const SizedBox(height: 30),
+            Text("Nome: $nome", style: const TextStyle(fontSize: 18)),
+            Text("Idade: $idade", style: const TextStyle(fontSize: 18)),
+            Text("Email: $email", style: const TextStyle(fontSize: 18)),
+            Text("Sexo: $sexo", style: const TextStyle(fontSize: 18)),
+            Text("Termos aceitos: ${termosAceitos ? "Sim" : "Não"}", style: const TextStyle(fontSize: 18)),
+            const SizedBox(height: 40),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+              ),
               onPressed: () {
                 Navigator.pop(context);
               },
               child: const Text("Voltar"),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 15),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+              ),
               onPressed: () {
                 Navigator.pop(context);
               },
