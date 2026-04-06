@@ -30,6 +30,65 @@ class _TelaCadastroState extends State<TelaCadastro> {
   String? sexoSelecionado;
   bool termosAceitos = false;
 
+  void _validarCampos() {
+    if (nomeController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Nome não pode ser vazio")),
+      );
+      return;
+    }
+
+    if (idadeController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Idade não pode ser vazia")),
+      );
+      return;
+    }
+
+    try {
+      int idade = int.parse(idadeController.text);
+      if (idade < 18) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Idade deve ser maior ou igual a 18")),
+        );
+        return;
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Idade deve ser um número")),
+      );
+      return;
+    }
+
+    if (emailController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Email não pode ser vazio")),
+      );
+      return;
+    }
+
+    if (!emailController.text.contains("@") || !emailController.text.contains(".")) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Email deve conter '@' e '.'")),
+      );
+      return;
+    }
+
+    if (sexoSelecionado == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Sexo deve estar selecionado")),
+      );
+      return;
+    }
+
+    if (termosAceitos == false) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("O checkbox dos termos deve estar marcado")),
+      );
+      return;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +149,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: _validarCampos,
                 child: const Text("Cadastrar"),
               ),
             ],
