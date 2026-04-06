@@ -30,6 +30,14 @@ class _TelaCadastroState extends State<TelaCadastro> {
   String? sexoSelecionado;
   bool termosAceitos = false;
 
+  @override
+  void dispose() {
+    nomeController.dispose();
+    idadeController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
+
   void _validarCampos() {
     if (nomeController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
