@@ -87,6 +87,19 @@ class _TelaCadastroState extends State<TelaCadastro> {
       );
       return;
     }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TelaConfirmacao(
+          nome: nomeController.text,
+          idade: idadeController.text,
+          email: emailController.text,
+          sexo: sexoSelecionado!,
+          termosAceitos: termosAceitos,
+        ),
+      ),
+    );
   }
 
   @override
@@ -155,6 +168,35 @@ class _TelaCadastroState extends State<TelaCadastro> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class TelaConfirmacao extends StatelessWidget {
+  final String nome;
+  final String idade;
+  final String email;
+  final String sexo;
+  final bool termosAceitos;
+
+  const TelaConfirmacao({
+    super.key,
+    required this.nome,
+    required this.idade,
+    required this.email,
+    required this.sexo,
+    required this.termosAceitos,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Confirmação"),
+      ),
+      body: const Center(
+        child: Text("Tela 2: Dados recebidos com sucesso!"),
       ),
     );
   }
